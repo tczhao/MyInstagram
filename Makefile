@@ -11,5 +11,8 @@ init-django:
 shell:
 	pipenv shell
 
+create-app:
+	python manage.py startapp $(app)
+
 run:
 	python manage.py runserver
