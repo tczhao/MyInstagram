@@ -14,5 +14,14 @@ shell:
 create-app:
 	python manage.py startapp $(app)
 
+makemigrations: # traverse models.py in app to calculate the difference to the latest migration and generate the migration to database
+	python manage.py makemigrations
+
+migrate: # apply all migration that hasn't been applied to the database
+	python manage.py migrate
+
+createsuperser: # to view content management system
+	python manage.py createsuperuser
+
 run:
 	python manage.py runserver
