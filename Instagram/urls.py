@@ -17,8 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from Instagram.views import HelloWorld
+from Instagram.views import HelloWorld, PostsView, PostDetailView
 
 urlpatterns = [
-    path('', HelloWorld.as_view(), name='helloworld')
+    path('', HelloWorld.as_view()),
+    path('posts/', PostsView.as_view()),
+    path('post/<int:pk>/', PostDetailView.as_view(), name='post_detail'), # alias name, accessible from html
 ]
+# after post/ consume a primary key as integer

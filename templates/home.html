@@ -1,0 +1,9 @@
+{% load static %}
+
+<div>
+    {% for post in object_list %}
+        <a href="{% url 'post_detail' post.id %}">
+        <img src="/{{post.image.url}}" <!-- / means attach to localhost instead of current path-->
+        </a>
+    {% endfor %}
+</div>
