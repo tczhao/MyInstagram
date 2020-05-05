@@ -1,0 +1,22 @@
+<html>
+    {% load static %} <!--template language, load static dir-->
+    <head>
+        <meta charset="utf-8"> <!--encoding-->
+        <meta name="viewport" content="width=device-width, initial-scale=1"><!--mobile viewpoint-->
+        <title>TZ Instagram</title>
+        <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'vendor/font-awesome-4.6.3/css/font-awesome.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet"> <!--the static here refers to static dir in setting-->
+    </head>
+    <body>
+        {% include 'header.html' %}
+        
+        <div class="content-wrapper">
+            <div class="container">
+                {% block content %}
+                {% endblock content%}
+            </div>
+        </div>
+
+    </body>
+</html>
