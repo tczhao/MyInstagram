@@ -13,7 +13,7 @@ class  HelloWorld(TemplateView):
 
 class PostsView(ListView):
     model = Post
-    template_name = 'home.html'
+    template_name = 'index.html'
 
 class PostDetailView(DetailView):
     model = Post
