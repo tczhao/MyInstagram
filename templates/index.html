@@ -33,6 +33,9 @@
                             {{ post.get_like_count }} like{% if post.get_like_count > 1 %}s{% endif %}
                         {% endif %}
                     </div>
+                    <section class="input-row">
+                        <i class="fa fa-heart-o submit-like" aria-hidden="true"></i>
+                    </section>
                     <ul class="comment-list">
                         <a class="view-more"></a>
                         {% for comment in post.comments.all %}
