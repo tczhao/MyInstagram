@@ -21,7 +21,7 @@ from Instagram.views import SignUp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('instagram/', include('Instagram.urls')),
+    path('', include('Instagram.urls')),
     path('auth/', include('django.contrib.auth.urls')),
     path('auth/signup/', SignUp.as_view(), name='signup'),
 ]

@@ -11,11 +11,13 @@ function error_cb(error) {
 
 function create_like(success_cb, error_cb) {
     var post_pk = $(this).siblings('.hidden-data').find('.post-pk').text();
+    // this -> webpage icon i
+    // sibling -> find class hidden-data
     console.log(post_pk);
 
     $.ajax({
         type: "POST",
-        url: '/like',
+        url: '/instagram/like',
         data: {
             post_pk: post_pk
         },

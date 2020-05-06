@@ -1,9 +1,8 @@
 {% extends "base.html" %}
 
-{% comment %}  
-<img src="/{{post.image.url}}" / means attach to localhost instead of current path
 {% load custom_tags %}
-{% endcomment %}
+
+{% comment %} <img src="/{{post.image.url}}" / means attach to localhost instead of current path {% endcomment %}
 
 {% block content %}
 
@@ -34,21 +33,6 @@
                         {% endif %}
                     </div>
                     <section class="input-row">
-                        <i class="fa fa-heart-o submit-like" aria-hidden="true"></i>
-                    </section>
-                    <ul class="comment-list">
-                        <a class="view-more"></a>
-                        {% for comment in post.comments.all %}
-                        <li class="comment-list__comment">
-                            <a href="{% url 'profile' comment.user.pk %}" class="user">
-                                {{ comment.user.username }}
-                            </a>
-                            <span class="comment">{{ comment.comment }}</span>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    {% comment %}
-                    <section class="input-row">
                         <i class="fa {% has_user_liked_post post user %} submit-like" aria-hidden="true"></i>
                         <div class="comment-input-wrapper">
                             <input class="add-comment" type="text" placeholder="Add a comment...">
@@ -57,7 +41,6 @@
                             <span class="post-pk">{{ post.pk }}</span>
                         </div>
                     </section>
-                    {% endcomment %}
                 </div>
             </div>
         </div>
