@@ -2,7 +2,7 @@ from annoying.decorators import ajax_request
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
-from .models import Post, Like
+from .models import Post, Like, InstagramUser
 
 # from django.contrib.auth.forms import UserCreationForm
 from Instagram.forms import CustomerUserCreationForm
@@ -15,6 +15,16 @@ class  HelloWorld(TemplateView):
 class PostsView(ListView):
     model = Post
     template_name = 'index.html'
+
+class UserDetailView(DetailView):
+    model = InstagramUser
+    template_name = 'user_detail.html'
+
+class UserEditView(LoginRequiredMixin, UpdateView):
+    model = InstagramUser
+    template_name = 'user_edit.html'
+    fields = ['profile_picture', 'username']
+    login_url = 'login'
 
 class PostDetailView(DetailView):
     model = Post
