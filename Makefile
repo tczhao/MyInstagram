@@ -25,3 +25,9 @@ createsuperser: # to view content management system
 
 run:
 	python manage.py runserver
+
+push:
+	git push heroku master
+
+kill:
+	$(shell kill $$(ps aux | grep $(name) | awk '{print $$2}'))

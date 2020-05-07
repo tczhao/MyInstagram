@@ -63,6 +63,10 @@ class Post(models.Model):
         blank=True,
         null=True
     )
+    posted_on = models.DateTimeField(
+        auto_now_add=True,
+        editable=False,
+    )
 
     def __str__(self):
         return self.title
@@ -75,6 +79,7 @@ class Post(models.Model):
 
     def get_comment_count(self):
         return self.comments.count()
+
 
 class Like(models.Model): # contains 2 fields
     post = models.ForeignKey(
