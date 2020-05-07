@@ -6,6 +6,7 @@ from .models import Post, Like, InstagramUser
 
 # from django.contrib.auth.forms import UserCreationForm
 from Instagram.forms import CustomerUserCreationForm
+from Instagram.models import UserConnection
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -15,6 +16,15 @@ class  HelloWorld(TemplateView):
 class PostsView(ListView):
     model = Post
     template_name = 'index.html'
+    
+    def get_queryset(self):
+        current_user = self.request.user
+        if str(current_user) == "AnonymousUser":
+            return super(PostsView, self).get_queryset()
+        following = set()
+        for conn in UserConnection.objects.filter(creator=current_user).select_related('following'):
+            following.add(conn.following)
+        return Post.objects.filter(author__in=following)
 
 class UserDetailView(DetailView):
     model = InstagramUser
@@ -70,4 +80,30 @@ def addLike(request):
     return {
         'result': result,
         'post_pk': post_pk
+    }
+
+@ajax_request
+def toggleFollow(request):
+    current_user = InstagramUser.objects.get(pk=request.user.pk)
+    follow_user_pk = request.POST.get('follow_user_pk')
+    follow_user = InstagramUser.objects.get(pk=follow_user_pk)
+
+    try:
+        if current_user != follow_user:
+            if request.POST.get('type') == 'follow':
+                connection = UserConnection(creator=current_user, following=follow_user)
+                connection.save()
+            elif request.POST.get('type') == 'unfollow':
+                UserConnection.objects.filter(creator=current_user, following=follow_user).delete()
+            result = 1
+        else:
+            result = 0
+    except Exception as e:
+        print(e)
+        result = 0
+
+    return {
+        'result': result,
+        'type': request.POST.get('type'),
+        'follow_user_pk': follow_user_pk
     }
