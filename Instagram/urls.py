@@ -21,7 +21,8 @@ from Instagram.views import (HelloWorld, PostsView,
                             PostDetailView, PostCreateView, 
                             PostUpdateView, PostDeleteView, 
                             addLike, UserDetailView,
-                            UserEditView, toggleFollow)
+                            UserEditView, toggleFollow,
+                            ExploreView)
 
 urlpatterns = [
     path('helloworld', HelloWorld.as_view(), name='helloworld'),
@@ -34,5 +35,6 @@ urlpatterns = [
     path('togglefollow', toggleFollow),
     path('user/<int:pk>/', UserDetailView.as_view(), name='user_detail'),
     path('user_edit/<int:pk>/', UserEditView.as_view(), name='user_edit'),
+    path('explore', ExploreView.as_view(), name='explore'),
 ]
 # after post/ consume a primary key as integer

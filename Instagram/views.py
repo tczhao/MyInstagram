@@ -20,11 +20,12 @@ class PostsView(ListView):
     def get_queryset(self):
         current_user = self.request.user
         if str(current_user) == "AnonymousUser":
-            return super(PostsView, self).get_queryset()
+            # return super(PostsView, self).get_queryset()
+            return Post.objects.all().order_by('-posted_on')[:20]
         following = set()
         for conn in UserConnection.objects.filter(creator=current_user).select_related('following'):
             following.add(conn.following)
-        return Post.objects.filter(author__in=following)
+        return Post.objects.filter(author__in=following)[:20]
 
 class UserDetailView(DetailView):
     model = InstagramUser
@@ -107,3 +108,12 @@ def toggleFollow(request):
         'type': request.POST.get('type'),
         'follow_user_pk': follow_user_pk
     }
+
+class ExploreView(ListView):
+    model = Post
+    template_name = 'explore.html'
+
+    login_url = 'login'
+
+    def get_queryset(self):
+        return Post.objects.all().order_by('-posted_on')[:20]
