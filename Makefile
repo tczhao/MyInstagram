@@ -31,3 +31,11 @@ push:
 
 kill:
 	$(shell kill $$(ps aux | grep $(name) | awk '{print $$2}'))
+
+ssh-agent:
+	eval "$(ssh-agent -s)"
+	ssh-add $(file)
+
+# heroku login
+# heroku create
+# heroku ps:scale web=1
