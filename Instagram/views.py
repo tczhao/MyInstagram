@@ -34,7 +34,7 @@ class UserDetailView(DetailView):
 class UserEditView(LoginRequiredMixin, UpdateView):
     model = InstagramUser
     template_name = 'user_edit.html'
-    fields = ['profile_picture', 'username']
+    fields = ['profile_picture']
     login_url = 'login'
 
 class PostDetailView(DetailView):
