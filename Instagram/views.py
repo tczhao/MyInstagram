@@ -44,8 +44,13 @@ class PostDetailView(DetailView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'post_create.html'
-    fields = '__all__' # user need to input all fields
+    # fields = '__all__' # user need to input all fields
     login_url = 'login'
+    fields = ["title", "image"]
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(PostCreateView, self).form_valid(form)
 
 class PostUpdateView(UpdateView):
     model = Post

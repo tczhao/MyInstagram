@@ -54,14 +54,14 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         related_name='my_post'
     )
-    title = models.TextField(blank=True, null=True)
+    title = models.TextField(blank=False, null=False)
     # image = models.ImageField()
     image = ProcessedImageField(
         upload_to='static/image/posts',
         format='JPEG',
         options={'quality': 100},
-        blank=True,
-        null=True
+        blank=False,
+        null=False
     )
     posted_on = models.DateTimeField(
         auto_now_add=True,
